@@ -1,0 +1,166 @@
+// 0. Comment(주석)
+
+// One line comment
+/* 
+    Multiline
+    comment
+*/
+
+// 1. Variable(변수)
+$red: #fa5252;
+$orange: #fd7e14;
+$yellow: #fcc419;
+$green: #40c057;
+$blue: #339af0;
+$indigo: #5c7cfa;
+$violet: #7905f2;
+/*
+    Sass의 변수에는 변수 범위가 있어 특정 selector(선택자)에서 선언된 변수의 경우,
+    해당 selector에서만 접근이 가능합니다.
+
+    만일, selector내에서 전역변수로 설정하고 싶다면,
+    변수 선언문 뒤에 !global 플래그를 넣어 선언합니다.
+*/
+
+// 2. Math Operator(수학 연산자)
+/*
+    Sass에서는 javascript와 유사한 수학 연산자들을 사용할 수 있습니다.
+
+    다만, +, - operator 사용 시 단위는 통일해주어야 오류가 발생하지 않습니다.
+    이런 작업이 필요한 경우 내장함수인 calc()를 활용할 수 있습니다.
+*/
+@mixin square($size) {
+    $calculated: 32px * $size; //변수 정의와 곱셈 operator 사용
+    width: $calculated;
+    height: $calculated;
+}
+
+// 3. Built-in Functions(내장함수)
+/*
+    - Sass Built-in modules -
+    https://sass-lang.com/documentation/modules
+
+    Ex. darken() - 특정 색을 얼마나 어둡게 할지 계산하여 출력해주는 내장함수.
+    $buttonColor: #2ecc71;
+    $buttonDark: darken(%buttonColor, 10%);
+*/
+
+// 4. Nesting(중첩)
+
+.sasscomponent {
+    display: flex;
+    .box {
+      background: red;
+      cursor: pointer;
+      transition: all 0.3s ease-in;
+      
+      // 부모 선택자(여기서는 .box)를 reference 할 때, &를 사용.
+      &.red {
+        background: $red;
+        @include square(1);
+      }
+      &.orange {
+        background: $orange;
+        @include square(2);
+      }
+      &.yellow {
+        background: $yellow;
+        @include square(3);
+      }
+      &.green {
+        background: $green;
+        @include square(4);
+      }
+      &.blue {
+        background: $blue;
+        @include square(5);
+      }
+      &.indigo {
+        background: $indigo;
+        @include square(6);
+      }
+      &.violet {
+        background: $violet;
+        @include square(7);
+      }
+    }
+  }
+
+  // 5. Import(불러오기)
+  /*
+    @import "layout.scss";
+    @import "layout"; (확장자 생략 가능)
+  */
+
+  // 6. Extend(상속)
+  /*
+    Sass에서 특정 선택자를 상속 할 때, @extend 사용
+    - Sass -
+    .box {
+    border: 1px solid gray;
+    padding: 10px;
+    display: inline-block;
+    }
+
+    .success-box {
+    @extend .box; (.success-box에서 .box의 요소를 상속)
+    border: 1px solid green;
+    }
+
+    - CSS -
+    .box, .success-box {
+    border: 1px solid gray;
+    padding: 10px;
+    display: inline-block;
+    }
+
+    .success-box {
+    border: 1px solid green;
+    }
+  */
+
+  // 7. Mixin(믹스인)
+  /*
+    extend와 유사하지만 argument(인수)를 받을 수 있다는 장점이 있다.
+
+    mixin을 선언 시에는 @mixin directive를 사용하며, 이를 사용할 때에는,
+    @include directive를 사용합니다.
+
+    - ex -
+    @mixin headline ($color, $size) {
+    color: $color;
+    font-size: $size;
+    }
+
+    h1 {
+    @include headline(green, 12px);
+    }
+  */
+
+  // 8. Function(함수)
+  /*
+    위에서 언급한 mixin와 유사하나, mixin은 style markup를 반환하는 것과 달리,
+    function의 경우 @return directive를 통하여 값을 반환합니다.
+
+    - ex -
+    @function calc-percent($target, $container) {
+        @return ($target / $container) * 100%;
+    }
+
+    .my-module {
+        width: calc-percent(650px, 1000px);
+    }
+  */
+
+  // 9. Compile(Sass 파일을 CSS 파일로 컴파일 하기)
+  /*
+    - 파일 하나를 컴파일 시 -
+    node-sass [options] <input.scss> [output.css]
+
+    - 모든 폴더내 파일을 컴파일 시 -
+    node-sass my-sass-folder/ -o my-css-folder/
+
+    - Sass 파일이 수정될 경우, 자동으로 컴파일 되도록 하기 -
+    node-sass -w sass/ -o css/
+    (-w 옵션이 파일이 변경되는 것을 감시해주는 옵션)
+  */

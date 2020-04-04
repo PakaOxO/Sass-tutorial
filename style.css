@@ -1,0 +1,90 @@
+@charset "UTF-8";
+/* 
+    Multiline
+    comment
+*/
+/*
+    Sass의 변수에는 변수 범위가 있어 특정 selector(선택자)에서 선언된 변수의 경우,
+    해당 selector에서만 접근이 가능합니다.
+
+    만일, selector내에서 전역변수로 설정하고 싶다면,
+    변수 선언문 뒤에 !global 플래그를 넣어 선언합니다.
+*/
+/*
+    Sass에서는 javascript와 유사한 수학 연산자들을 사용할 수 있습니다.
+
+    다만, +, - operator 사용 시 단위는 통일해주어야 오류가 발생하지 않습니다.
+    이런 작업이 필요한 경우 내장함수인 calc()를 활용할 수 있습니다.
+*/
+/*
+    - Sass Built-in modules -
+    https://sass-lang.com/documentation/modules
+
+    Ex. darken() - 특정 색을 얼마나 어둡게 할지 계산하여 출력해주는 내장함수.
+    $buttonColor: #2ecc71;
+    $buttonDark: darken(%buttonColor, 10%);
+*/
+.sasscomponent {
+  display: flex; }
+  .sasscomponent .box {
+    background: red;
+    cursor: pointer;
+    transition: all 0.3s ease-in; }
+    .sasscomponent .box.red {
+      background: #fa5252;
+      width: 32px;
+      height: 32px; }
+    .sasscomponent .box.orange {
+      background: #fd7e14;
+      width: 64px;
+      height: 64px; }
+    .sasscomponent .box.yellow {
+      background: #fcc419;
+      width: 96px;
+      height: 96px; }
+    .sasscomponent .box.green {
+      background: #40c057;
+      width: 128px;
+      height: 128px; }
+    .sasscomponent .box.blue {
+      background: #339af0;
+      width: 160px;
+      height: 160px; }
+    .sasscomponent .box.indigo {
+      background: #5c7cfa;
+      width: 192px;
+      height: 192px; }
+    .sasscomponent .box.violet {
+      background: #7905f2;
+      width: 224px;
+      height: 224px; }
+
+/*
+    @import "layout.scss";
+    @import "layout"; (확장자 생략 가능)
+  */
+/*
+    Sass에서 특정 선택자를 상속 할 때, @extend 사용
+    - Sass -
+    .box {
+    border: 1px solid gray;
+    padding: 10px;
+    display: inline-block;
+    }
+
+    .success-box {
+    @extend .box; (.success-box에서 .box의 요소를 상속)
+    border: 1px solid green;
+    }
+
+    - CSS -
+    .box, .success-box {
+    border: 1px solid gray;
+    padding: 10px;
+    display: inline-block;
+    }
+
+    .success-box {
+    border: 1px solid green;
+    }
+  */
